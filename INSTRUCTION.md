@@ -26,7 +26,6 @@ This project requires a WebGL-capable browser with support for several extension
 Google Chrome seems to work best on all platforms. If you have problems running the starter code, use Chrome or Chromium, and make sure you have updated your browser and video drivers.
 
 ## Requirements
-**Ask on the mailing list for any clarifications**
 
 In this project, you are given code for:
 - Loading glTF models
