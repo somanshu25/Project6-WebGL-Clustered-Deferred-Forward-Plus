@@ -161,9 +161,9 @@ The WebGPU version/aspects of this assignment.
 
 ## Submit
 
-Beware of any build issues discussed on the Google Group.
+Beware of any build issues discussed on piazza
 
-Open a GitHub pull request so that we can see that you have finished. The title should be "Project 5B: YOUR NAME". The template of the comment section of your pull request is attached below, you can do some copy and paste:
+Open a GitHub pull request so that we can see that you have finished. The title should be "Project 6: YOUR NAME". The template of the comment section of your pull request is attached below, you can do some copy and paste:
 
 - Repo Link
 - (Briefly) Mentions features that you've completed. Especially those bells and whistles you want to highlight
