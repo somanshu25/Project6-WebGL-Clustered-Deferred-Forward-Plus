@@ -110,7 +110,6 @@ export default function(params) {
        if (i >= numLights ){
          break;
        }
-      // // int lightIndex = int(ExtractFloat(u_clusterbuffer, numClusters, texHeight, clusterID, i + 1));
       Light light = UnpackLight(int(ExtractFloat(u_clusterbuffer, numClusters, texHeight, clusterID, i + 1)));
       // Light light = UnpackLight(i);
       float lightDistance = distance(light.position, v_position);
