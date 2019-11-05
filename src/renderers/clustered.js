@@ -1,5 +1,5 @@
 import { gl, WEBGL_draw_buffers, canvas } from '../init';
-import { mat4, vec4 } from 'gl-matrix';
+import { mat4, vec4, vec3 } from 'gl-matrix';
 import { loadShaderProgram, renderFullscreenQuad } from '../utils';
 import { NUM_LIGHTS } from '../scene';
 import toTextureVert from '../shaders/deferredToTexture.vert.glsl';
@@ -10,7 +10,7 @@ import TextureBuffer from './textureBuffer';
 import BaseRenderer from './base';
 import { MAX_LIGHTS_PER_CLUSTER } from './base';
 
-export const NUM_GBUFFERS = 4;
+export const NUM_GBUFFERS = 3;
 
 export default class ClusteredRenderer extends BaseRenderer {
   constructor(xSlices, ySlices, zSlices) {
@@ -31,7 +31,7 @@ export default class ClusteredRenderer extends BaseRenderer {
       numGBuffers: NUM_GBUFFERS,
       maxLightsPerCluster: MAX_LIGHTS_PER_CLUSTER
     }), {
-      uniforms: ['u_gbuffers[0]', 'u_gbuffers[1]', 'u_gbuffers[2]', 'u_gbuffers[3]','u_lightbuffer', 'u_clusterbuffer','u_canvasWidth','u_canvasHeight','u_xSlice','u_ySlice','u_zSlice','u_viewMatrix','u_near','u_far'],
+      uniforms: ['u_gbuffers[0]', 'u_gbuffers[1]', 'u_gbuffers[2]', 'u_gbuffers[3]','u_lightbuffer', 'u_clusterbuffer','u_canvasWidth','u_canvasHeight','u_xSlice','u_ySlice','u_zSlice','u_viewMatrix','u_near','u_far','u_eyePos'],
       //uniforms: ['u_gbuffers[0]', 'u_gbuffers[1]', 'u_gbuffers[2]', 'u_gbuffers[3]'],
       attribs: ['a_uv'],
     });
@@ -126,7 +126,7 @@ export default class ClusteredRenderer extends BaseRenderer {
 
     // Upload the camera matrix
     gl.uniformMatrix4fv(this._progCopy.u_viewProjectionMatrix, false, this._viewProjectionMatrix);
-
+    
     // Draw the scene. This function takes the shader program so that the model's textures can be bound to the right inputs
     scene.draw(this._progCopy);
     
@@ -167,6 +167,8 @@ export default class ClusteredRenderer extends BaseRenderer {
     gl.bindTexture(gl.TEXTURE_2D, this._clusterTexture.glTexture);
     gl.uniform1i(this._progShade.u_clusterbuffer, 3);
 
+    let cameraPos = vec3.fromValues(camera.position.x,camera.position.y,camera.position.z); 
+    gl.uniform3fv(this._progShade.u_eyePos, cameraPos);
     // TODO: Bind any other shader inputs
     gl.uniform1i(this._progShade.u_canvasWidth, canvas.width);
     gl.uniform1i(this._progShade.u_canvasHeight, canvas.height);

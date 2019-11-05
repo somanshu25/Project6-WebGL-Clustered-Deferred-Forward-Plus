@@ -14,6 +14,7 @@ export default function(params) {
    uniform int u_ySlice;
    uniform int u_zSlice;
    uniform mat4 u_viewMatrix;
+   uniform vec3 u_eyePos;
 
   uniform sampler2D u_clusterbuffer;
 
@@ -69,6 +70,16 @@ export default function(params) {
     }
   }
   
+  vec3 decode(vec2 f)
+  {
+    f = f * 2.0 - 1.0;
+    vec3 n = vec3( f.x, f.y, 1.0 - abs( f.x ) - abs( f.y ) );
+    float t = clamp(-n.z, 0.0, 1.0);
+    n.x += n.x >= 0.0 ? -t : t;
+    n.y += n.y >= 0.0 ? -t : t;
+    return normalize(n);
+  }
+
   void main() {
     //TODO: extract data from g buffers and do lighting
     vec4 gb0 = texture2D(u_gbuffers[0], v_uv);
@@ -80,6 +91,9 @@ export default function(params) {
     vec3 v_position = gb0.rgb;
     vec3 albedo = gb1.rgb;
     vec3 normal = gb2.rgb;
+    //vec3 normal = decode(vec2(gb0.w,gb1.w));
+
+    //vec3 normal = vec3(gb0.w,gb1.w,normalZ);
 
     vec4 viewPos = u_viewMatrix * vec4(v_position, 1.0);
 
@@ -111,7 +125,16 @@ export default function(params) {
       float lightIntensity = cubicGaussian(2.0 * lightDistance / light.radius);
       float lambertTerm = max(dot(L, normal), 0.0);
 
+      // Blinn–Phong reflection model
+      vec3 lightDir   = normalize(light.position - u_eyePos);
+      vec3 viewDir    = normalize(light.position - v_position);
+      vec3 halfwayDir = normalize(lightDir + viewDir);
+      
+      float spec = pow(max(dot(normal, halfwayDir), 0.0), 2.0);
+      vec3 specular = light.color * spec * 0.01;
+
       fragColor += albedo * lambertTerm * light.color * vec3(lightIntensity);
+      fragColor += specular;
     }
 
     const vec3 ambientLight = vec3(0.025);
