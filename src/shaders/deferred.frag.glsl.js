@@ -91,7 +91,7 @@ export default function(params) {
     vec3 v_position = gb0.rgb;
     vec3 albedo = gb1.rgb;
     vec3 normal = gb2.rgb;
-    //vec3 normal = decode(vec2(gb0.w,gb1.w));
+    //vec3 normalZ = decode(vec2(gb0.w,gb1.w));
     //vec3 normal = vec3(gb0.w,gb1.w,normalZ);
     
     vec4 viewPos = u_viewMatrix * vec4(v_position, 1.0);
