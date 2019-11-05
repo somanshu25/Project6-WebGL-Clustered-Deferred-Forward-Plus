@@ -23,10 +23,9 @@ WebGL Clustered and Forward+ Shading
 3. [Clustering](#CLustering)
 4. [Effects](#Effects)
 5. [Optimization](#Optimization)
-6. [Analysis] (#Analysis)
-7. [Bloopers] (#Bloopers)
-8. [References](#References)
-9. [Credits] (#Credits)
+6. [Analysis](#Analysis)
+7. [Bloopers](#Bloopers)
+8. [Credits](#Credits)
 
 ### Introduction
 In this project, we will be performing analysis of three rendering techniques, forward, forward plus and clusgtering (using deferred). I will be also performing some of the lightning effect such as Blinn Phong lightning model and also tried to perform the optimization by using two slots int eh texture buffer instead of three by saving the normal 2-components.
@@ -34,12 +33,24 @@ In this project, we will be performing analysis of three rendering techniques, f
 ### Forward Plus
 In the forward rendering technique, we go over all the light sources and then loop over all the object geometries and then check whether the light has an impact on the geometry adn then shade the point/geometry according to it. In forward plus, we divide the screen in tiles of same size. Hence, we get tiles in the shape of frustum in which the light source will lie. FOr each frustum tile, we will be storing the corresponding number of lights impacted and the list of light indices. AFter performing this, for the geometry lying in the space, we calculate the frustum it les and loop over those lights only, rather than the total number of lights, giving us performance improvement.
 
-### Clustering
+<p align="center"><img src="https://github.com/somanshu25/Project6-WebGL-Clustered-Deferred-Forward-Plus/blob/master/Forwardplus.png" width="600"/></p>
 
+### Clustering
 Here, we reuse the forward plus logic of storing the lights for eahc frustum and we stor the geometry related data (posirtion, normal and color of the point) in the g-buffer (geometry buffer) and then use the data when the geometry is called and then loop over the lights. Here, we are not looping all over the geometries in case of previous techniques.
 
 ### Effects
+In the clustering rendering technique, we can add the specular to the fragment color which can make the lights more brighter which are visible in the screenshot below.
 
+<p align="center"><img src="https://github.com/somanshu25/Project6-WebGL-Clustered-Deferred-Forward-Plus/blob/master/Cluster.png" width="600"/></p>
+
+### Optimization
+To optimize the memory, we can save the memory usage for the g-buffer by using 2 slots intead of 3 slots. We can compress the 3D normal representation into two dimension using [Octahedron-normal vectors encoding](https://knarkowicz.wordpress.com/2014/04/16/octahedron-normal-vector-encoding/). We can observe the FPS optimization in the table below.
+
+### Analysis
+The below graph shows the frame rate per seconf for the three techniques for varying the number of lights.
+<p align="center"><img src="https://github.com/somanshu25/Project6-WebGL-Clustered-Deferred-Forward-Plus/blob/master/Analysis1.png" width="600"/></p>
+
+We can clearly observe that clustering using ForwardPlus logic gives the best result as it uses the advantage of tiling and using g-buffers for optimization and improving performance. The forward technique is chosen as baseline here.
 
 ### Credits
 
