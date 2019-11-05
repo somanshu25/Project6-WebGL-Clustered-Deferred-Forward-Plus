@@ -36,6 +36,7 @@ void main() {
     vec3 norm = applyNormalMap(v_normal, vec3(texture2D(u_normap, v_uv)));
     vec3 col = vec3(texture2D(u_colmap, v_uv));
 
+<<<<<<< HEAD
     
     // Compressing the normal as it is a unit vector and we can calculate using x and y components for the magnitude
     // For sign, make one of the color component as negative, for checking the sign.
@@ -49,4 +50,15 @@ void main() {
      gl_FragData[1] = vec4(col, 1.0);
      gl_FragData[2] = vec4(norm, 1.0);
 
+=======
+    gl_FragData[0] = vec4(v_position, 1.0);
+    gl_FragData[1] = vec4(col, 1.0);
+    gl_FragData[2] = vec4(norm, 1.0);
+
+    // TODO: populate your g buffer
+    // gl_FragData[0] = ??
+    // gl_FragData[1] = ??
+    // gl_FragData[2] = ??
+    // gl_FragData[3] = ??
+>>>>>>> 71ac4ae5d3a1701c73f5b1fe46c495bbddfc77a5
 }

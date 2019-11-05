@@ -14,7 +14,10 @@ export default function(params) {
    uniform int u_ySlice;
    uniform int u_zSlice;
    uniform mat4 u_viewMatrix;
+<<<<<<< HEAD
    uniform vec3 u_eyePos;
+=======
+>>>>>>> 71ac4ae5d3a1701c73f5b1fe46c495bbddfc77a5
 
   uniform sampler2D u_clusterbuffer;
 
@@ -91,9 +94,12 @@ export default function(params) {
     vec3 v_position = gb0.rgb;
     vec3 albedo = gb1.rgb;
     vec3 normal = gb2.rgb;
+<<<<<<< HEAD
     //vec3 normal = decode(vec2(gb0.w,gb1.w));
 
     //vec3 normal = vec3(gb0.w,gb1.w,normalZ);
+=======
+>>>>>>> 71ac4ae5d3a1701c73f5b1fe46c495bbddfc77a5
 
     vec4 viewPos = u_viewMatrix * vec4(v_position, 1.0);
 
@@ -125,6 +131,7 @@ export default function(params) {
       float lightIntensity = cubicGaussian(2.0 * lightDistance / light.radius);
       float lambertTerm = max(dot(L, normal), 0.0);
 
+<<<<<<< HEAD
       // Blinn–Phong reflection model
       vec3 lightDir   = normalize(light.position - u_eyePos);
       vec3 viewDir    = normalize(light.position - v_position);
@@ -135,6 +142,9 @@ export default function(params) {
 
       fragColor += albedo * lambertTerm * light.color * vec3(lightIntensity);
       fragColor += specular;
+=======
+      fragColor += albedo * lambertTerm * light.color * vec3(lightIntensity);
+>>>>>>> 71ac4ae5d3a1701c73f5b1fe46c495bbddfc77a5
     }
 
     const vec3 ambientLight = vec3(0.025);
