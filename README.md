@@ -34,12 +34,15 @@ In this project, we will be performing analysis of three rendering techniques, f
 ### Forward Plus
 In the forward rendering technique, we go over all the light sources and then loop over all the object geometries and then check whether the light has an impact on the geometry adn then shade the point/geometry according to it. In forward plus, we divide the screen in tiles of same size. Hence, we get tiles in the shape of frustum in which the light source will lie. FOr each frustum tile, we will be storing the corresponding number of lights impacted and the list of light indices. AFter performing this, for the geometry lying in the space, we calculate the frustum it les and loop over those lights only, rather than the total number of lights, giving us performance improvement.
 
-### Clustering
+<p align="center"><img src="https://github.com/somanshu25/Project6-WebGL-Clustered-Deferred-Forward-Plus/blob/master/Forwardplus.png" width="600"/></p>
 
+### Clustering
 Here, we reuse the forward plus logic of storing the lights for eahc frustum and we stor the geometry related data (posirtion, normal and color of the point) in the g-buffer (geometry buffer) and then use the data when the geometry is called and then loop over the lights. Here, we are not looping all over the geometries in case of previous techniques.
 
 ### Effects
+In the clustering rendering technique, we can add the specular to the fragment color which can make the lights more brighter which are visible in the screenshot below.
 
+<p align="center"><img src="https://github.com/somanshu25/Project6-WebGL-Clustered-Deferred-Forward-Plus/blob/master/Cluster.png" width="600"/></p>
 
 ### Credits
 
