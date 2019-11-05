@@ -14,7 +14,7 @@ WebGL Clustered and Forward+ Shading
 
 ### Demo Video/GIF
 
-[![](img/video.png)](TODO)
+[!](https://github.com/somanshu25/Project6-WebGL-Clustered-Deferred-Forward-Plus/blob/master/vedio2.gif)
 
 ### Table of Contents
 
