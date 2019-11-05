@@ -6,11 +6,9 @@ WebGL Clustered and Forward+ Shading
 * SOMANSHU AGARWAL
   * [LinkedIn](https://www.linkedin.com/in/somanshu25/)
 * Tested on: **Google Chrome Version 76.0.3809.132 ** on
-  MacBook Pro 2.3 GHz Intel Core i5, 8 GB 2133 MHz LPDDR3
+  MacBook Pro 2.3 GHz Intel Core i5 @ 8 GB 2133 MHz LPDDR3, Intel Iris Plus Graphics 640 1536 MB
 
-### Live Online
-
-[![](img/thumb.png)](http://TODO.github.io/Project5B-WebGL-Deferred-Shading)
+<p align="center"><img src="https://github.com/somanshu25/Project6-WebGL-Clustered-Deferred-Forward-Plus/blob/master/Cluster.png" width="700"/></p>
 
 ### Demo Video/GIF
 
@@ -39,8 +37,6 @@ Here, we reuse the forward plus logic of storing the lights for eahc frustum and
 
 ### Effects
 In the clustering rendering technique, we can add the specular to the fragment color which can make the lights more brighter which are visible in the screenshot below.
-
-<p align="center"><img src="https://github.com/somanshu25/Project6-WebGL-Clustered-Deferred-Forward-Plus/blob/master/Cluster.png" width="600"/></p>
 
 ### Optimization
 To optimize the memory, we can save the memory usage for the g-buffer by using 2 slots intead of 3 slots. We can compress the 3D normal representation into two dimension using [Octahedron-normal vectors encoding](https://knarkowicz.wordpress.com/2014/04/16/octahedron-normal-vector-encoding/). We can observe the FPS optimization in the table below.
