@@ -31,11 +31,8 @@ export default class ClusteredRenderer extends BaseRenderer {
       numGBuffers: NUM_GBUFFERS,
       maxLightsPerCluster: MAX_LIGHTS_PER_CLUSTER
     }), {
-<<<<<<< HEAD
       uniforms: ['u_gbuffers[0]', 'u_gbuffers[1]', 'u_gbuffers[2]', 'u_gbuffers[3]','u_lightbuffer', 'u_clusterbuffer','u_canvasWidth','u_canvasHeight','u_xSlice','u_ySlice','u_zSlice','u_viewMatrix','u_near','u_far','u_eyePos'],
-=======
-      uniforms: ['u_gbuffers[0]', 'u_gbuffers[1]', 'u_gbuffers[2]', 'u_gbuffers[3]','u_lightbuffer', 'u_clusterbuffer','u_canvasWidth','u_canvasHeight','u_xSlice','u_ySlice','u_zSlice','u_viewMatrix','u_near','u_far'],
->>>>>>> 71ac4ae5d3a1701c73f5b1fe46c495bbddfc77a5
+      //uniforms: ['u_gbuffers[0]', 'u_gbuffers[1]', 'u_gbuffers[2]', 'u_gbuffers[3]','u_lightbuffer', 'u_clusterbuffer','u_canvasWidth','u_canvasHeight','u_xSlice','u_ySlice','u_zSlice','u_viewMatrix','u_near','u_far'],
       //uniforms: ['u_gbuffers[0]', 'u_gbuffers[1]', 'u_gbuffers[2]', 'u_gbuffers[3]'],
       attribs: ['a_uv'],
     });
@@ -171,11 +168,9 @@ export default class ClusteredRenderer extends BaseRenderer {
     gl.bindTexture(gl.TEXTURE_2D, this._clusterTexture.glTexture);
     gl.uniform1i(this._progShade.u_clusterbuffer, 3);
 
-<<<<<<< HEAD
     let cameraPos = vec3.fromValues(camera.position.x,camera.position.y,camera.position.z); 
     gl.uniform3fv(this._progShade.u_eyePos, cameraPos);
-=======
->>>>>>> 71ac4ae5d3a1701c73f5b1fe46c495bbddfc77a5
+    
     // TODO: Bind any other shader inputs
     gl.uniform1i(this._progShade.u_canvasWidth, canvas.width);
     gl.uniform1i(this._progShade.u_canvasHeight, canvas.height);
